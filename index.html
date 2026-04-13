@@ -305,7 +305,20 @@ nav .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 24px;
+}
+
+.project-screenshot {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-screenshot {
+  transform: scale(1.03) rotate(-0.5deg);
 }
 
 .project-card:nth-child(1) .project-visual { background: linear-gradient(135deg, #1a0a2e, #0d1f3c, #0a2520); }
@@ -666,7 +679,7 @@ footer {
       <span class="gradient-text">Builds Things</span>
     </h1>
     <p class="hero-sub">
-      Quality Engineer & CS student — building AI-powered tools that solve real problems on the shop floor.
+      Quality Engineer at Magellan Aerospace & CS student — building AI-powered tools that solve real problems on the shop floor.
     </p>
     <div class="hero-tags">
       <span class="hero-tag">React + Vite</span>
@@ -690,25 +703,7 @@ footer {
       <article class="project-card">
         <div class="project-card-inner">
           <div class="project-visual">
-            <div class="project-mockup">
-              <div class="mockup-bar">
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-url">localhost:5173/mrb-ai</div>
-              </div>
-              <div class="mockup-body">
-                <div class="mockup-line accent" style="width:55%"></div>
-                <div class="mockup-line medium"></div>
-                <div class="mockup-line short"></div>
-                <div class="mockup-block">
-                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-violet)"></div>
-                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-pink)"></div>
-                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-cyan)"></div>
-                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-orange)"></div>
-                </div>
-              </div>
-            </div>
+            <img src="images/mrb-ai.png" alt="Multi-Agent MRB AI System" class="project-screenshot">
           </div>
           <div class="project-content">
             <div class="project-number">01</div>
@@ -735,22 +730,7 @@ footer {
       <article class="project-card">
         <div class="project-card-inner">
           <div class="project-visual">
-            <div class="project-mockup">
-              <div class="mockup-bar">
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-url">localhost:5173/docfinder</div>
-              </div>
-              <div class="mockup-body">
-                <div class="mockup-line" style="width:100%; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1px solid rgba(255,255,255,0.04);"></div>
-                <div class="mockup-line medium"></div>
-                <div class="mockup-line" style="width:100%"></div>
-                <div class="mockup-line short"></div>
-                <div class="mockup-line" style="width:90%"></div>
-                <div class="mockup-line" style="width:70%"></div>
-              </div>
-            </div>
+            <img src="images/docfinder.png" alt="DocFinder Documentation Search" class="project-screenshot">
           </div>
           <div class="project-content">
             <div class="project-number">02</div>
@@ -777,21 +757,7 @@ footer {
       <article class="project-card">
         <div class="project-card-inner">
           <div class="project-visual">
-            <div class="project-mockup">
-              <div class="mockup-bar">
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-dot"></div>
-                <div class="mockup-url">localhost:5173/shop-floor</div>
-              </div>
-              <div class="mockup-body">
-                <div class="mockup-line accent" style="width:40%; background: var(--accent-cyan); opacity: 0.4;"></div>
-                <div class="mockup-line" style="width:100%; background: var(--surface-2); border: 1px solid rgba(255,255,255,0.04); height: 50px; border-radius: 10px;"></div>
-                <div class="mockup-line medium"></div>
-                <div class="mockup-line short"></div>
-                <div class="mockup-line" style="width:95%"></div>
-              </div>
-            </div>
+            <img src="images/shop-floor.png" alt="Shop Floor Assistant AI" class="project-screenshot">
           </div>
           <div class="project-content">
             <div class="project-number">03</div>
@@ -837,11 +803,6 @@ footer {
       <div class="footer-links">
         <a href="https://github.com/" target="_blank">GitHub</a>
         <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-        <a href="mailto:your@email.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#067f69737446636b676f6a2865696b">Email</a>
       </div>
     </div>
-  </div>
-</footer>
-
-</body>
-</html>
