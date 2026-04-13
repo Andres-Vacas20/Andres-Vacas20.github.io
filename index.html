@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andres | AI + Aerospace Manufacturing</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   ANDRES — Portfolio
+   Bold & Colorful / Manufacturing + AI
+   ═══════════════════════════════════════ */
+
+:root {
+  --bg: #0b0b0f;
+  --surface: #141419;
+  --surface-2: #1c1c24;
+  --text: #eeeef0;
+  --text-dim: #8888a0;
+  --accent-orange: #ff6b2b;
+  --accent-cyan: #00e5c7;
+  --accent-violet: #a855f7;
+  --accent-pink: #ff3c83;
+  --accent-yellow: #fbbf24;
+  --gradient-1: linear-gradient(135deg, #ff6b2b, #ff3c83);
+  --gradient-2: linear-gradient(135deg, #00e5c7, #3b82f6);
+  --gradient-3: linear-gradient(135deg, #a855f7, #ec4899);
+  --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── Noise Overlay ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Glow Blobs ─── */
+.glow-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  animation: float 20s ease-in-out infinite;
+}
+
+.glow-1 {
+  width: 600px; height: 600px;
+  background: var(--accent-orange);
+  top: -200px; left: -100px;
+}
+
+.glow-2 {
+  width: 500px; height: 500px;
+  background: var(--accent-cyan);
+  bottom: -150px; right: -100px;
+  animation-delay: -7s;
+}
+
+.glow-3 {
+  width: 400px; height: 400px;
+  background: var(--accent-violet);
+  top: 40%; left: 50%;
+  animation-delay: -14s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ─── Container ─── */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Navigation ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  background: rgba(11, 11, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.25s;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-links a.active {
+  color: var(--accent-orange);
+  background: rgba(255, 107, 43, 0.1);
+}
+
+/* ─── Hero ─── */
+.hero {
+  padding: 160px 0 80px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 12px var(--accent-cyan);
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+
+.hero h1 .gradient-text {
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.hero-tag {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  transition: all 0.3s;
+}
+
+.hero-tag:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  transform: translateY(-2px);
+}
+
+/* ─── Section ─── */
+.section {
+  padding: 60px 0;
+}
+
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+  line-height: 1.15;
+}
+
+/* ─── Project Cards ─── */
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  animation: fadeUp 0.6s ease both;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+
+.project-card:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.project-card-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 360px;
+}
+
+.project-visual {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.project-card:nth-child(1) .project-visual { background: linear-gradient(135deg, #1a0a2e, #0d1f3c, #0a2520); }
+.project-card:nth-child(2) .project-visual { background: linear-gradient(135deg, #2a0a0a, #1f0d2c, #0a1525); }
+.project-card:nth-child(3) .project-visual { background: linear-gradient(135deg, #0a1a2e, #0d2c1f, #1a250a); }
+
+.project-mockup {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-mockup {
+  transform: scale(1.03) rotate(-0.5deg);
+}
+
+.mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.mockup-dot:nth-child(1) { background: #ff5f57; }
+.mockup-dot:nth-child(2) { background: #febc2e; }
+.mockup-dot:nth-child(3) { background: #28c840; }
+
+.mockup-url {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'Outfit', sans-serif;
+}
+
+.mockup-body {
+  padding: 20px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mockup-line {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface-2);
+}
+
+.mockup-line.short { width: 60%; }
+.mockup-line.medium { width: 80%; }
+.mockup-line.accent { background: var(--accent-orange); opacity: 0.4; width: 45%; height: 10px; }
+
+.mockup-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mockup-block-item {
+  height: 40px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.project-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 16px;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.1);
+  -webkit-text-fill-color: transparent;
+}
+
+.project-card:nth-child(1) .project-number { -webkit-text-stroke-color: var(--accent-violet); }
+.project-card:nth-child(2) .project-number { -webkit-text-stroke-color: var(--accent-pink); }
+.project-card:nth-child(3) .project-number { -webkit-text-stroke-color: var(--accent-cyan); }
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.project-desc {
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tech-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.project-card:nth-child(1) .tech-tag {
+  background: rgba(168, 85, 247, 0.12);
+  color: var(--accent-violet);
+}
+
+.project-card:nth-child(2) .tech-tag {
+  background: rgba(255, 60, 131, 0.12);
+  color: var(--accent-pink);
+}
+
+.project-card:nth-child(3) .tech-tag {
+  background: rgba(0, 229, 199, 0.12);
+  color: var(--accent-cyan);
+}
+
+.project-features {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.project-feature {
+  font-size: 13px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.project-feature::before {
+  content: '→';
+  color: var(--accent-orange);
+  font-weight: 700;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.project-link.primary {
+  color: var(--bg);
+}
+
+.project-card:nth-child(1) .project-link.primary { background: var(--gradient-3); }
+.project-card:nth-child(2) .project-link.primary { background: var(--gradient-1); }
+.project-card:nth-child(3) .project-link.primary { background: var(--gradient-2); }
+
+.project-link.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 107, 43, 0.3);
+}
+
+.project-link.secondary {
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.project-link.secondary:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ─── Add More Section ─── */
+.add-more {
+  border: 2px dashed rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 60px;
+  text-align: center;
+  margin-top: 32px;
+  transition: all 0.3s;
+}
+
+.add-more:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.02);
+}
+
+.add-more-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.add-more-text {
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.add-more-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 4px;
+}
+
+/* ─── Footer ─── */
+footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 80px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.footer-left span {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 14px;
+  font-family: 'Outfit', sans-serif;
+  display: block;
+  margin-top: 4px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-orange);
+}
+
+/* ─── Animations ─── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .project-card-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .project-visual {
+    min-height: 220px;
+    padding: 24px;
+  }
+
+  .project-content {
+    padding: 24px;
+  }
+
+  .project-number {
+    font-size: 48px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Glow Blobs -->
+<div class="glow-container">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <div class="nav-logo">AM</div>
+    <div class="nav-links">
+      <a href="#projects" class="active">Projects</a>
+      <a href="https://github.com/" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Building AI tools for aerospace manufacturing
+    </div>
+    <h1>
+      Andres<br>
+      <span class="gradient-text">Builds Things</span>
+    </h1>
+    <p class="hero-sub">
+      Quality Engineer & CS student — building AI-powered tools that solve real problems on the shop floor.
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">React + Vite</span>
+      <span class="hero-tag">Node / Express</span>
+      <span class="hero-tag">Claude API</span>
+      <span class="hero-tag">Aerospace MFG</span>
+      <span class="hero-tag">Quality Engineering</span>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-label">Featured Work</div>
+    <h2 class="section-title">Projects I've shipped.</h2>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: Multi-Agent MRB AI -->
+      <article class="project-card">
+        <div class="project-card-inner">
+          <div class="project-visual">
+            <div class="project-mockup">
+              <div class="mockup-bar">
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-url">localhost:5173/mrb-ai</div>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-line accent" style="width:55%"></div>
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line short"></div>
+                <div class="mockup-block">
+                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-violet)"></div>
+                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-pink)"></div>
+                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-cyan)"></div>
+                  <div class="mockup-block-item" style="border-left: 3px solid var(--accent-orange)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">01</div>
+            <h3 class="project-title">Multi-Agent MRB AI</h3>
+            <p class="project-desc">
+              Three specialized AI agents that collaboratively analyze nonconformance reports. Each agent brings a different expertise — engineering, quality, and disposition — to deliver comprehensive MRB recommendations for aerospace parts.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Claude API</span>
+              <span class="tech-tag">Multi-Agent</span>
+              <span class="tech-tag">Aerospace QA</span>
+            </div>
+            <div class="project-features">
+              <div class="project-feature">3 specialized agents: Engineering, Quality, Disposition</div>
+              <div class="project-feature">Analyzes nonconformances against specs and procedures</div>
+              <div class="project-feature">Recommends RTA, UAI, or Scrap with justification</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2: DocFinder -->
+      <article class="project-card">
+        <div class="project-card-inner">
+          <div class="project-visual">
+            <div class="project-mockup">
+              <div class="mockup-bar">
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-url">localhost:5173/docfinder</div>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-line" style="width:100%; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1px solid rgba(255,255,255,0.04);"></div>
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line" style="width:100%"></div>
+                <div class="mockup-line short"></div>
+                <div class="mockup-line" style="width:90%"></div>
+                <div class="mockup-line" style="width:70%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">02</div>
+            <h3 class="project-title">DocFinder</h3>
+            <p class="project-desc">
+              Full-stack workplace documentation search app built to help aerospace personnel instantly find SWIs, SOPs, and QPs. Natural language search powered by AI eliminates the pain of digging through file shares for the right procedure.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">React + Vite</span>
+              <span class="tech-tag">Node / Express</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">Claude API</span>
+            </div>
+            <div class="project-features">
+              <div class="project-feature">Natural language search across all documentation</div>
+              <div class="project-feature">Indexes SWIs, SOPs, QPs, and work instructions</div>
+              <div class="project-feature">Built from scratch — first full-stack project</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3: Shop Floor Assistant -->
+      <article class="project-card">
+        <div class="project-card-inner">
+          <div class="project-visual">
+            <div class="project-mockup">
+              <div class="mockup-bar">
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-dot"></div>
+                <div class="mockup-url">localhost:5173/shop-floor</div>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-line accent" style="width:40%; background: var(--accent-cyan); opacity: 0.4;"></div>
+                <div class="mockup-line" style="width:100%; background: var(--surface-2); border: 1px solid rgba(255,255,255,0.04); height: 50px; border-radius: 10px;"></div>
+                <div class="mockup-line medium"></div>
+                <div class="mockup-line short"></div>
+                <div class="mockup-line" style="width:95%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">03</div>
+            <h3 class="project-title">Shop Floor Assistant AI</h3>
+            <p class="project-desc">
+              Operator-level AI assistant that answers shop floor questions in real-time. Operators upload Routers, Drawings, and Specs as PDFs, then ask about torque values, tolerances, heat treat parameters — and get answers citing exact document sections.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">React + Vite</span>
+              <span class="tech-tag">Express</span>
+              <span class="tech-tag">PDF Upload</span>
+              <span class="tech-tag">Claude API</span>
+            </div>
+            <div class="project-features">
+              <div class="project-feature">Drag & drop PDF upload with text extraction</div>
+              <div class="project-feature">Answers only from loaded documents — no hallucination</div>
+              <div class="project-feature">Cites Router ops, Drawing details, and Spec sections</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Add More Placeholder -->
+    <div class="add-more">
+      <div class="add-more-icon">🚀</div>
+      <div class="add-more-text">More projects coming soon</div>
+      <div class="add-more-sub">Currently building · Always shipping</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-left">
+        Andres
+        <span>Quality Engineer · CS Student · AI Builder</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+        <a href="mailto:your@email.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
